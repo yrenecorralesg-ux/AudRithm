@@ -1,0 +1,28 @@
+<style>
+.st-key-aud_welcome{position:relative;overflow:hidden;border:1px solid #b8e3d1;border-radius:24px;padding:clamp(24px,4vw,56px);background:radial-gradient(ellipse at 112% 120%,#4ada80 0%,#13926b 30%,transparent 60%),linear-gradient(120deg,#07554d,#003e35 58%,#096a50);box-shadow:0 18px 48px #064b3312;margin-bottom:24px}
+.st-key-aud_welcome:before{content:"";position:absolute;right:-180px;top:-120px;width:700px;height:700px;border:70px solid #74f1b00c;border-radius:50%;pointer-events:none}
+.aud-intro{position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center;color:#fff;min-height:335px}
+.aud-brand{display:flex;align-items:center;gap:17px;margin:0 0 25px}.aud-logo{display:flex;gap:5px;align-items:center;transform:skew(-12deg);flex-shrink:0}
+.aud-logo i{display:block;width:12px;border-radius:8px;background:#34d980;height:29px}.aud-logo i:nth-child(2){height:43px;background:#3ce57a}.aud-logo i:nth-child(3){height:55px;background:#83e35e}.aud-logo i:nth-child(4){height:39px;background:#d8e46a}
+.aud-brand h1{font-size:clamp(38px,4.5vw,64px);font-weight:750;letter-spacing:-2px;line-height:1.05;color:white;margin:0;padding:0}.aud-subtitle{font-size:clamp(12px,1.3vw,17px);color:#dcf7ed;margin-top:9px}
+.aud-message{font-size:clamp(20px,2vw,27px);line-height:1.4;font-weight:600;max-width:480px;margin:0 0 23px;letter-spacing:-.5px}
+.aud-features{list-style:none;padding:0;margin:0;display:grid;gap:12px;font-size:15px}.aud-features li{display:flex;align-items:center;gap:11px}.aud-check{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;background:#4dda93;color:#fff;font-weight:700;font-size:14px;flex-shrink:0}
+.aud-art{width:100%;max-width:480px;justify-self:center;filter:drop-shadow(0 24px 18px #002c3c50)}
+.aud-section-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:#059669;margin-bottom:8px}
+.aud-flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:20px 24px;background:#eef7f2;border:1px solid #d7e9df;border-radius:16px;margin:20px 0}.aud-flow span{font-size:13px;font-weight:600;color:#245448}.aud-flow b{color:#7eae98;font-weight:400}
+@media(max-width:900px){.aud-intro{grid-template-columns:1fr;min-height:auto}.aud-art{max-width:330px}.aud-brand h1{letter-spacing:-1px}.aud-brand{margin-bottom:24px}.aud-message{max-width:none}.st-key-aud_welcome{padding:26px}.aud-art{margin-top:5px}.aud-features{font-size:14px}.aud-flow{justify-content:flex-start}}
+@media(prefers-reduced-motion:no-preference){.aud-art{animation:aud-appear .7s ease-out}@keyframes aud-appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}}
+</style>
+<section class="aud-intro" aria-label="Bienvenida a AudRithm">
+  <div>
+    <div class="aud-brand"><span class="aud-logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div><h1>AudRithm</h1><div class="aud-subtitle">Laboratorio de Análisis de Algoritmos</div></div></div>
+    <p class="aud-message">Analiza, prueba y compara algoritmos de forma interactiva y reproducible.</p>
+    <ul class="aud-features">
+      <li><span class="aud-check" aria-hidden="true">✓</span>Explora soluciones algorítmicas</li>
+      <li><span class="aud-check" aria-hidden="true">✓</span>Valida su correctitud con pruebas</li>
+      <li><span class="aud-check" aria-hidden="true">✓</span>Mide y compara su rendimiento</li>
+      <li><span class="aud-check" aria-hidden="true">✓</span>Visualiza resultados y genera reportes</li>
+    </ul>
+  </div>
+  <img class="aud-art" src="{{LAPTOP_SVG}}" alt="Portátil con código y una gráfica de análisis de algoritmos"/>
+</section>

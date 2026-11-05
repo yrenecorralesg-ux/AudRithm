@@ -1,5 +1,6 @@
 """Entrada real de las seis vistas; ningún experimento se inicia al abrir."""
 import io
+import base64
 import json
 import random
 import re
@@ -25,9 +26,9 @@ st.html("""<style>
 .aud-cell{display:inline-block;padding:.6rem;margin:.2rem;border-radius:8px;background:#e2e8e5;color:#163c32}
 .aud-opt{background:#059669;color:white}.aud-flow{padding:1.2rem;border:1px solid #c9dfd5;border-radius:14px;line-height:2}
 </style>""")
-st.sidebar.title("◈ AudRithm")
+st.sidebar.title("▰ AudRithm")
 st.sidebar.caption("LABORATORIO DE ALGORITMOS")
-view = st.sidebar.radio("Navegación", ["Inicio", "Algoritmos", "Pruebas QA", "Experimentos", "Resultados", "Reporte"])
+view = st.sidebar.radio("Navegación", ["Inicio", "Algoritmos", "Pruebas QA", "Experimentos", "Resultados", "Reporte"], key="navigation")
 st.sidebar.divider()
 st.sidebar.link_button("Repositorio del equipo ↗", "https://github.com/yrenecorralesg-ux/AudRithm")
 st.sidebar.caption("Equipo 5 · Bitácora 1\n\nReferencia asistida por IA. Nombres y contribuciones reales pendientes de validación.")
@@ -52,19 +53,40 @@ def show_theory():
             st.markdown((ROOT / "docs" / name).read_text(encoding="utf-8"))
 
 
+def navigate(destination):
+    st.session_state.navigation = destination
+
+
 if view == "Inicio":
-    st.html('<div class="aud-hero"><div class="aud-kicker">MEDIR · VALIDAR · COMPRENDER</div><h1>AudRithm</h1><p>Laboratorio de Análisis de Algoritmos</p></div>')
-    st.subheader("De una idea algorítmica a evidencia verificable")
-    st.write("Encontrar el segmento contiguo no vacío de mayor suma. Comparar una solución lineal con una enumeración cuadrática y contrastar su crecimiento con mediciones reproducibles.")
+    with st.container(key="aud_welcome"):
+        welcome = (ROOT / "assets" / "welcome.html").read_text(encoding="utf-8")
+        laptop = base64.b64encode((ROOT / "assets" / "laptop.svg").read_bytes()).decode("ascii")
+        st.html(welcome.replace("{{LAPTOP_SVG}}", f"data:image/svg+xml;base64,{laptop}"))
+        begin, repository, _ = st.columns([1,1.25,1.7])
+        begin.button("Comenzar →", type="primary", on_click=navigate, args=("Algoritmos",), width="stretch")
+        repository.link_button("Ver repositorio ↗", "https://github.com/yrenecorralesg-ux/AudRithm", width="stretch")
+    st.html('<div class="aud-section-label">EVIDENCIA DEL LABORATORIO</div>')
     qa = st.session_state.get("qa", load_json("qa_results.json"))
     frame = results_frame()
     cols = st.columns(3)
     cols[0].metric("Algoritmos implementados", 2)
     cols[1].metric("Pruebas aprobadas", f'{qa["passed"]}/{qa["tests"]}' if qa else "Pendiente")
     cols[2].metric("Mediciones disponibles", len(frame) if frame is not None else "Sin datos")
-    st.html('<div class="aud-flow">Entrada → Algoritmos → Validación → Experimentación → Análisis → Reporte</div>')
-    st.markdown("### Explora el laboratorio\n**Algoritmos:** ejecuta Kadane y fuerza bruta. **Pruebas QA:** comprueba contratos y equivalencia. **Experimentos:** genera evidencia. **Resultados:** examina medianas y crecimiento. **Reporte:** revisa las ocho secciones académicas.")
-    st.info("Usa el menú lateral para acceder a cada módulo. El informe necesita revisión humana antes de su entrega.")
+    st.html('<div class="aud-flow"><span>01 · Entrada</span><b>→</b><span>02 · Algoritmos</span><b>→</b><span>03 · Validación</span><b>→</b><span>04 · Experimentos</span><b>→</b><span>05 · Análisis</span><b>→</b><span>06 · Reporte</span></div>')
+    st.subheader("Tu laboratorio, de principio a fin")
+    st.write("Bitácora 1 · Subarreglo de suma máxima. Explora Kadane y fuerza bruta, valida sus resultados y contrasta su crecimiento con evidencia reproducible.")
+    for row in [[("Algoritmos", "Explora la solución", "Ejecuta ambos motores y sigue la traza real de Kadane."),
+                 ("Pruebas QA", "Comprueba los resultados", "Casos límite, oráculo independiente y pruebas diferenciales."),
+                 ("Experimentos", "Mide el rendimiento", "Entradas pareadas, semilla fija y cinco repeticiones.")],
+                [("Resultados", "Interpreta la evidencia", "Medianas, razones de crecimiento y gráficas descargables."),
+                 ("Reporte", "Prepara tu bitácora", "Ocho requisitos, matriz de cumplimiento y PDF de trabajo.")]]:
+        for column, (destination, title, description) in zip(st.columns(len(row)), row):
+            with column, st.container(border=True):
+                st.caption(destination.upper())
+                st.markdown(f"**{title}**")
+                st.write(description)
+                st.button(f"Abrir {destination} →", key=f"open_{destination}", on_click=navigate, args=(destination,))
+    st.caption("Equipo 5 · Implementación de referencia asistida por IA. El informe requiere revisión, comprensión y aprobación académica del equipo.")
 
 elif view == "Algoritmos":
     st.title("Laboratorio de algoritmos")
