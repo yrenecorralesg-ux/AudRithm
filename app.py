@@ -29,7 +29,7 @@ st.sidebar.title("◈ AudRithm")
 st.sidebar.caption("LABORATORIO DE ALGORITMOS")
 view = st.sidebar.radio("Navegación", ["Inicio", "Algoritmos", "Pruebas QA", "Experimentos", "Resultados", "Reporte"])
 st.sidebar.divider()
-st.sidebar.link_button("Repositorio del equipo ↗", "https://github.com/BryanS200OK/Equipo_5_Bitacora_sub_arreglo")
+st.sidebar.link_button("Repositorio del equipo ↗", "https://github.com/yrenecorralesg-ux/AudRithm")
 st.sidebar.caption("Equipo 5 · Bitácora 1\n\nReferencia asistida por IA. Nombres y contribuciones reales pendientes de validación.")
 
 

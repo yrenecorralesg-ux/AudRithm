@@ -70,7 +70,7 @@ def build():
                 story.append(Image(str(results/f"timing_{name}.png"),width=15*cm,height=7.5*cm))
             para("Figuras derivadas del CSV archivado. Interpretación y conclusión final pendientes del equipo; no constituyen demostración matemática.","AudNote")
         if index==8:
-            para("Repositorio: https://github.com/BryanS200OK/Equipo_5_Bitacora_sub_arreglo", "AudNote")
+            para("Repositorio: https://github.com/yrenecorralesg-ux/AudRithm", "AudNote")
             para("Fuente académica: Asignación de proyectos por equipo y Bitácora 1, Profa. Msc. Sosa, Cohorte X, 2026-III; PDF suministrado por el usuario. La solicitud completa de desarrollo se conserva en docs/user_request.txt.","AudNote")
 
     def footer(canvas,doc):

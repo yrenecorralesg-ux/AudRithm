@@ -63,7 +63,7 @@ Límites: máximo 3200 y cinco repeticiones; presupuesto de 90 s comprobado entr
 
 ## Publicación
 
-Repositorio destino: https://github.com/BryanS200OK/Equipo_5_Bitacora_sub_arreglo
+Repositorio destino: https://github.com/yrenecorralesg-ux/AudRithm
 
 Con el código en la raíz, iniciar sesión como propietario en https://share.streamlit.io/, autorizar GitHub y elegir el repositorio, la rama publicada y app.py. En opciones avanzadas elegir Python 3.13 (o 3.11 y validar CI). Solicitar el subdominio audrithm; si no está disponible, probar audrithm-equipo5. requirements.txt y .streamlit/config.toml están incluidos. No hay secretos ni archivos locales obligatorios fuera del repositorio. Las seis vistas y descargas funcionan con rutas ancladas al proyecto.
 
