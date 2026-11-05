@@ -1,6 +1,5 @@
 """Entrada real de las seis vistas; ningún experimento se inicia al abrir."""
 import io
-import base64
 import json
 import random
 import re
@@ -58,13 +57,18 @@ def navigate(destination):
 
 
 if view == "Inicio":
+    st.html('''<style>
+    .st-key-aud_welcome{background:#003b32;border:1px solid #16614f;border-radius:22px;overflow:hidden;margin-bottom:24px;box-shadow:0 16px 45px #003b321a}
+    .st-key-aud_welcome_actions{padding:0 24px 24px}
+    .aud-section-label{font-size:11px;letter-spacing:2px;font-weight:700;color:#059669;margin:10px 0}
+    @media(max-width:600px){.st-key-aud_welcome_actions{padding:0 14px 14px}}
+    </style>''')
     with st.container(key="aud_welcome"):
-        welcome = (ROOT / "assets" / "welcome.html").read_text(encoding="utf-8")
-        laptop = base64.b64encode((ROOT / "assets" / "laptop.svg").read_bytes()).decode("ascii")
-        st.html(welcome.replace("{{LAPTOP_SVG}}", f"data:image/svg+xml;base64,{laptop}"))
-        begin, repository, _ = st.columns([1,1.25,1.7])
-        begin.button("Comenzar →", type="primary", on_click=navigate, args=("Algoritmos",), width="stretch")
-        repository.link_button("Ver repositorio ↗", "https://github.com/yrenecorralesg-ux/AudRithm", width="stretch")
+        st.image(str(ROOT / "assets" / "audrithm-auditoria-empresarial.png"), width="stretch")
+        with st.container(key="aud_welcome_actions"):
+            begin, repository, _ = st.columns([1,1.25,1.7])
+            begin.button("Comenzar →", type="primary", on_click=navigate, args=("Algoritmos",), width="stretch")
+            repository.link_button("Ver repositorio ↗", "https://github.com/yrenecorralesg-ux/AudRithm", width="stretch")
     st.html('<div class="aud-section-label">EVIDENCIA DEL LABORATORIO</div>')
     qa = st.session_state.get("qa", load_json("qa_results.json"))
     frame = results_frame()
