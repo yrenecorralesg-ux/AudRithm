@@ -1,0 +1,264 @@
+{
+  "semilla": 42,
+  "repeticiones_por_tamano": 5,
+  "rango_valores": [
+    -100,
+    100
+  ],
+  "resumen": [
+    {
+      "n": 500,
+      "promedio_lineal_ms": 0.88506,
+      "razon_T2n_Tn_lineal": null,
+      "promedio_fuerza_bruta_ms": 87.39688,
+      "razon_T2n_Tn_fuerza_bruta": null
+    },
+    {
+      "n": 1000,
+      "promedio_lineal_ms": 0.37774,
+      "razon_T2n_Tn_lineal": 0.43,
+      "promedio_fuerza_bruta_ms": 164.4688,
+      "razon_T2n_Tn_fuerza_bruta": 1.88
+    },
+    {
+      "n": 2000,
+      "promedio_lineal_ms": 0.66508,
+      "razon_T2n_Tn_lineal": 1.76,
+      "promedio_fuerza_bruta_ms": 799.29026,
+      "razon_T2n_Tn_fuerza_bruta": 4.86
+    },
+    {
+      "n": 4000,
+      "promedio_lineal_ms": 1.93636,
+      "razon_T2n_Tn_lineal": 2.91,
+      "promedio_fuerza_bruta_ms": 1994.04936,
+      "razon_T2n_Tn_fuerza_bruta": 2.49
+    },
+    {
+      "n": 8000,
+      "promedio_lineal_ms": 1.3553,
+      "razon_T2n_Tn_lineal": 0.7,
+      "promedio_fuerza_bruta_ms": 7113.29708,
+      "razon_T2n_Tn_fuerza_bruta": 3.57
+    },
+    {
+      "n": 16000,
+      "promedio_lineal_ms": 6.47812,
+      "razon_T2n_Tn_lineal": 4.78,
+      "promedio_fuerza_bruta_ms": 21167.93872,
+      "razon_T2n_Tn_fuerza_bruta": 2.98
+    }
+  ],
+  "mediciones_detalladas": [
+    {
+      "n": 500,
+      "repeticion": 1,
+      "tiempo_lineal_ms": 0.2205,
+      "tiempo_fuerza_bruta_ms": 81.1202,
+      "suma_maxima_obtenida": 1200
+    },
+    {
+      "n": 500,
+      "repeticion": 2,
+      "tiempo_lineal_ms": 3.5141,
+      "tiempo_fuerza_bruta_ms": 46.7389,
+      "suma_maxima_obtenida": 3441
+    },
+    {
+      "n": 500,
+      "repeticion": 3,
+      "tiempo_lineal_ms": 0.2067,
+      "tiempo_fuerza_bruta_ms": 87.8537,
+      "suma_maxima_obtenida": 1867
+    },
+    {
+      "n": 500,
+      "repeticion": 4,
+      "tiempo_lineal_ms": 0.2188,
+      "tiempo_fuerza_bruta_ms": 106.1595,
+      "suma_maxima_obtenida": 1481
+    },
+    {
+      "n": 500,
+      "repeticion": 5,
+      "tiempo_lineal_ms": 0.2652,
+      "tiempo_fuerza_bruta_ms": 115.1121,
+      "suma_maxima_obtenida": 1655
+    },
+    {
+      "n": 1000,
+      "repeticion": 1,
+      "tiempo_lineal_ms": 0.4293,
+      "tiempo_fuerza_bruta_ms": 344.4281,
+      "suma_maxima_obtenida": 3769
+    },
+    {
+      "n": 1000,
+      "repeticion": 2,
+      "tiempo_lineal_ms": 0.6249,
+      "tiempo_fuerza_bruta_ms": 181.729,
+      "suma_maxima_obtenida": 2970
+    },
+    {
+      "n": 1000,
+      "repeticion": 3,
+      "tiempo_lineal_ms": 0.4087,
+      "tiempo_fuerza_bruta_ms": 85.9768,
+      "suma_maxima_obtenida": 1463
+    },
+    {
+      "n": 1000,
+      "repeticion": 4,
+      "tiempo_lineal_ms": 0.1166,
+      "tiempo_fuerza_bruta_ms": 66.9672,
+      "suma_maxima_obtenida": 5305
+    },
+    {
+      "n": 1000,
+      "repeticion": 5,
+      "tiempo_lineal_ms": 0.3092,
+      "tiempo_fuerza_bruta_ms": 143.2429,
+      "suma_maxima_obtenida": 1796
+    },
+    {
+      "n": 2000,
+      "repeticion": 1,
+      "tiempo_lineal_ms": 0.2789,
+      "tiempo_fuerza_bruta_ms": 730.64,
+      "suma_maxima_obtenida": 4277
+    },
+    {
+      "n": 2000,
+      "repeticion": 2,
+      "tiempo_lineal_ms": 0.2332,
+      "tiempo_fuerza_bruta_ms": 305.6912,
+      "suma_maxima_obtenida": 4481
+    },
+    {
+      "n": 2000,
+      "repeticion": 3,
+      "tiempo_lineal_ms": 0.2368,
+      "tiempo_fuerza_bruta_ms": 939.3728,
+      "suma_maxima_obtenida": 4456
+    },
+    {
+      "n": 2000,
+      "repeticion": 4,
+      "tiempo_lineal_ms": 1.58,
+      "tiempo_fuerza_bruta_ms": 1061.8693,
+      "suma_maxima_obtenida": 1533
+    },
+    {
+      "n": 2000,
+      "repeticion": 5,
+      "tiempo_lineal_ms": 0.9965,
+      "tiempo_fuerza_bruta_ms": 958.878,
+      "suma_maxima_obtenida": 2568
+    },
+    {
+      "n": 4000,
+      "repeticion": 1,
+      "tiempo_lineal_ms": 2.0326,
+      "tiempo_fuerza_bruta_ms": 2315.6839,
+      "suma_maxima_obtenida": 6481
+    },
+    {
+      "n": 4000,
+      "repeticion": 2,
+      "tiempo_lineal_ms": 1.0767,
+      "tiempo_fuerza_bruta_ms": 1966.1272,
+      "suma_maxima_obtenida": 3823
+    },
+    {
+      "n": 4000,
+      "repeticion": 3,
+      "tiempo_lineal_ms": 2.1498,
+      "tiempo_fuerza_bruta_ms": 1515.133,
+      "suma_maxima_obtenida": 2774
+    },
+    {
+      "n": 4000,
+      "repeticion": 4,
+      "tiempo_lineal_ms": 2.2091,
+      "tiempo_fuerza_bruta_ms": 1722.0981,
+      "suma_maxima_obtenida": 2942
+    },
+    {
+      "n": 4000,
+      "repeticion": 5,
+      "tiempo_lineal_ms": 2.2136,
+      "tiempo_fuerza_bruta_ms": 2451.2046,
+      "suma_maxima_obtenida": 3282
+    },
+    {
+      "n": 8000,
+      "repeticion": 1,
+      "tiempo_lineal_ms": 0.9285,
+      "tiempo_fuerza_bruta_ms": 5912.734,
+      "suma_maxima_obtenida": 9228
+    },
+    {
+      "n": 8000,
+      "repeticion": 2,
+      "tiempo_lineal_ms": 0.9252,
+      "tiempo_fuerza_bruta_ms": 8347.3407,
+      "suma_maxima_obtenida": 8333
+    },
+    {
+      "n": 8000,
+      "repeticion": 3,
+      "tiempo_lineal_ms": 0.9373,
+      "tiempo_fuerza_bruta_ms": 7944.4247,
+      "suma_maxima_obtenida": 11824
+    },
+    {
+      "n": 8000,
+      "repeticion": 4,
+      "tiempo_lineal_ms": 2.2852,
+      "tiempo_fuerza_bruta_ms": 6748.0703,
+      "suma_maxima_obtenida": 6378
+    },
+    {
+      "n": 8000,
+      "repeticion": 5,
+      "tiempo_lineal_ms": 1.7003,
+      "tiempo_fuerza_bruta_ms": 6613.9157,
+      "suma_maxima_obtenida": 7714
+    },
+    {
+      "n": 16000,
+      "repeticion": 1,
+      "tiempo_lineal_ms": 24.1825,
+      "tiempo_fuerza_bruta_ms": 25411.9464,
+      "suma_maxima_obtenida": 6555
+    },
+    {
+      "n": 16000,
+      "repeticion": 2,
+      "tiempo_lineal_ms": 1.8112,
+      "tiempo_fuerza_bruta_ms": 18810.9335,
+      "suma_maxima_obtenida": 8538
+    },
+    {
+      "n": 16000,
+      "repeticion": 3,
+      "tiempo_lineal_ms": 1.8158,
+      "tiempo_fuerza_bruta_ms": 19117.544,
+      "suma_maxima_obtenida": 9916
+    },
+    {
+      "n": 16000,
+      "repeticion": 4,
+      "tiempo_lineal_ms": 2.761,
+      "tiempo_fuerza_bruta_ms": 20060.945,
+      "suma_maxima_obtenida": 10845
+    },
+    {
+      "n": 16000,
+      "repeticion": 5,
+      "tiempo_lineal_ms": 1.8201,
+      "tiempo_fuerza_bruta_ms": 22438.3247,
+      "suma_maxima_obtenida": 11139
+    }
+  ]
+}
