@@ -64,9 +64,17 @@ Estados: **completo** = artefacto técnico y evidencia verificable disponibles; 
 
 - Archivo: README.md; requirements.txt; run_pipeline.py; scripts/build_report.py; docs/reproducibility.md; .github/workflows/tests.yml.
 - Respaldo: comandos exactos PowerShell/Linux, dependencias directas fijadas, semillas, pipeline que se detiene ante QA fallida y exporta evidencia; seis vistas integradas con módulos puros.
-- Evidencia: CSV/JSON/PNG, PDF borrador de ocho páginas en output/pdf/Equipo_5_Bitacora1.pdf, docs/bitacora1.md, repositorio publicado y scripts/check_app.py para seis vistas; su ejecución real se conserva en results/app_check.json. Las versiones transitivas del entorno Windows/Python 3.13 se registran adicionalmente en requirements-lock.txt.
-- Estado: **parcial** hasta confirmar publicación, revisión del PDF y reproducción por otro integrante. La publicación web complementaria no reemplaza la entrega.
-- Validación humana: instalar desde cero, ejecutar comandos, comprobar artefactos y commit final; completar integrantes, aprobar informe, declaración y presentación de 15 minutos. Autenticación de Streamlit Community Cloud requiere al propietario.
+- Evidencia local verificada: `python scripts/check_app.py` ejecutado con éxito en 2026-11-06 y `python -m pytest tests -q` con 44 pruebas pasando. Ambos resultados son evidencia local real del repositorio. `results/app_check.json` refleja la ejecución local y no la publicación pública.
+- Estado: **parcial** para despliegue real; **completo** para validación local de la app y de la regresión del laboratorio. La publicación web complementaria no reemplaza la entrega ni se declara verificada sin URL pública operativa.
+- Validación humana: instalar desde cero, ejecutar comandos, comprobar artefactos y commit final; completar integrantes, aprobar informe, declaración y presentación de 15 minutos. Autenticación de Streamlit Community Cloud requiere al propietario y la publicación real sigue pendiente de verificación directa.
+
+## 9. Mejora de sesión y comprobación local
+
+- Archivo: app.py; scripts/check_app.py.
+- Respaldo: el último análisis se conserva en `session_state`, la entrada y los algoritmos quedan visibles al volver a la vista Algoritmos, la entrada utilizada queda identificada en el resultado, la app advierte si cambia el arreglo y existe una opción para limpiar el análisis almacenado.
+- Evidencia local verificada: ejecución real de `python scripts/check_app.py` (seis vistas, persistencia, advertencia y limpieza) con salida `OK: Inicio`, `OK: Algoritmos`, `OK: Pruebas QA`, `OK: Experimentos`, `OK: Resultados`, `OK: Reporte`.
+- Estado: **completo** localmente; **pendiente** para la publicación real en entorno público.
+- Validación humana: comprobar la experiencia en navegador real y distinguir siempre la validación local de la publicación operativa.
 
 ## Condición de cierre académico
 

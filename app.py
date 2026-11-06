@@ -5,6 +5,7 @@ import random
 import re
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -43,6 +44,42 @@ def results_frame():
         return pd.DataFrame(st.session_state.experiment_rows)
     path = ROOT / "results" / "experiment_results.csv"
     return pd.read_csv(path) if path.exists() else None
+
+
+def parse_array_text(raw_text):
+    cleaned = (raw_text or "").strip()
+    if not cleaned:
+        raise ValueError("Ingresa un arreglo de enteros antes de ejecutar el análisis.")
+    if cleaned.startswith("[") and cleaned.endswith("]"):
+        cleaned = cleaned[1:-1]
+    tokens = [piece.strip() for piece in cleaned.split(",") if piece.strip()]
+    if not 1 <= len(tokens) <= 1000 or any(not re.fullmatch(r"[+-]?\d{1,10}", token) for token in tokens):
+        raise ValueError("Ingresa entre 1 y 1000 enteros de hasta diez dígitos, separados por comas.")
+    return [int(token) for token in tokens]
+
+
+def persist_analysis(raw_input, selected, answers):
+    if not answers:
+        st.session_state.pop("last_analysis", None)
+        return
+    st.session_state["last_analysis"] = {
+        "input_text": raw_input,
+        "selected": selected,
+        "results": [{
+            "name": entry[0],
+            "total": entry[1].total,
+            "start": entry[1].start,
+            "end": entry[1].end,
+            "subarray": list(entry[1].subarray),
+            "elapsed_us": entry[2],
+        } for entry in answers],
+        "equivalence": len(answers) == 2 and answers[0] == answers[1],
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+def clear_last_analysis():
+    st.session_state.pop("last_analysis", None)
 
 
 def show_theory():
@@ -95,6 +132,43 @@ if view == "Inicio":
 elif view == "Algoritmos":
     st.title("Laboratorio de algoritmos")
     st.caption("Subarreglo de suma máxima · índices inclusivos desde cero")
+    default_array_text = "[-2, 1, -3, 4, -1, 2, 1, -5, 4]"
+    last_analysis = st.session_state.get("last_analysis")
+    if "array_text" not in st.session_state:
+        st.session_state["array_text"] = last_analysis["input_text"] if last_analysis else default_array_text
+    if "algorithm_choice" not in st.session_state:
+        st.session_state["algorithm_choice"] = last_analysis["selected"] if last_analysis else "Ambos algoritmos"
+    clear_saved = False
+    if st.button("Limpiar análisis guardado", key="clear_analysis"):
+        clear_last_analysis()
+        st.session_state["array_text"] = default_array_text
+        st.session_state["algorithm_choice"] = "Ambos algoritmos"
+        clear_saved = True
+        last_analysis = None
+    text = st.text_area("Arreglo de enteros (separados por comas)", key="array_text", max_chars=18000)
+    selected = st.selectbox("Algoritmos", ["Ambos algoritmos", "Kadane O(n)", "Fuerza bruta O(n²)"], key="algorithm_choice")
+
+    if last_analysis:
+        current_text = text.strip()
+        if current_text != last_analysis["input_text"].strip():
+            st.warning("Entrada modificada desde el último análisis ejecutado. Vuelve a ejecutar para actualizar el resultado.")
+        st.caption(f"Entrada utilizada en este resultado: {last_analysis['input_text']}")
+        st.caption(f"Algoritmos guardados: {last_analysis['selected']}")
+        st.info("Último análisis conservado en la sesión actual.")
+        for item in last_analysis["results"]:
+            st.subheader(item["name"])
+            a, b, c = st.columns(3)
+            a.metric("Suma máxima", item["total"])
+            b.metric("Intervalo [inicio, fin]", f"[{item['start']}, {item['end']}]")
+            c.metric("Observación individual", f"{item['elapsed_us'] / 1000:.2f} μs")
+            st.write("Subarreglo:", item["subarray"])
+        if len(last_analysis["results"]) == 2 and last_analysis["equivalence"]:
+            st.success("Equivalencia confirmada: suma, índices y subarreglo coinciden.")
+        elif len(last_analysis["results"]) == 2:
+            st.error("Discrepancia detectada en el último análisis guardado.")
+    elif clear_saved:
+        st.caption("Análisis guardado limpio. Puedes ejecutar un nuevo análisis desde cero.")
+
     with st.expander("Generar una entrada reproducible"):
         n = st.slider("Tamaño", 1, 1000, 20)
         bounds = st.slider("Rango de valores", -100, 100, (-20,20))
@@ -103,42 +177,38 @@ elif view == "Algoritmos":
         if st.button("Generar arreglo aleatorio"):
             rng = random.Random(int(seed) if seeded else None)
             st.session_state["array_text"] = str([rng.randint(*bounds) for _ in range(n)])
-    text = st.text_area("Arreglo de enteros (separados por comas)", value="[-2, 1, -3, 4, -1, 2, 1, -5, 4]", key="array_text", max_chars=18000)
-    selected = st.selectbox("Algoritmos", ["Ambos algoritmos", "Kadane O(n)", "Fuerza bruta O(n²)"])
+
     if st.button("Ejecutar análisis", type="primary"):
         try:
-            cleaned = text.strip()
-            if cleaned.startswith("[") and cleaned.endswith("]"):
-                cleaned = cleaned[1:-1]
-            tokens = cleaned.split(",")
-            if not 1 <= len(tokens) <= 1000 or any(not re.fullmatch(r"\s*[+-]?\d{1,10}\s*", t) for t in tokens):
-                raise ValueError("Ingresa entre 1 y 1000 enteros de hasta diez dígitos, separados por comas.")
-            arr = [int(t) for t in tokens]
+            arr = parse_array_text(text)
             answers = []
             for name, fn in [("Kadane O(n)", kadane), ("Fuerza bruta O(n²)", brute_force)]:
                 if selected == "Ambos algoritmos" or selected == name:
                     before = time.perf_counter_ns()
                     result = fn(arr)
-                    elapsed = time.perf_counter_ns()-before
-                    answers.append(result)
+                    elapsed = time.perf_counter_ns() - before
+                    answers.append((name, result, elapsed))
                     st.subheader(name)
-                    a,b,c = st.columns(3)
+                    a, b, c = st.columns(3)
                     a.metric("Suma máxima", result.total)
                     b.metric("Intervalo [inicio, fin]", f"[{result.start}, {result.end}]")
                     c.metric("Observación individual", f"{elapsed / 1000:.2f} μs")
                     st.write("Subarreglo:", list(result.subarray))
-            if len(answers)==2:
-                if answers[0] != answers[1]:
+            if len(answers) == 2:
+                if answers[0][1] != answers[1][1]:
                     st.error("Discrepancia detectada")
                 else:
                     st.success("Equivalencia confirmada: suma, índices y subarreglo coinciden.")
-            result = answers[0]
-            st.html("".join(f'<span class="aud-cell {"aud-opt" if result.start <= i <= result.end else ""}">{v}</span>' for i,v in enumerate(arr[:100])))
-            if len(arr)>100:
-                st.caption("Vista limitada a los primeros 100 elementos; el resultado utiliza la entrada completa.")
-            st.caption("Una observación individual contiene ruido; usa Experimentos para comparar medianas.")
-            with st.expander("Ejecución paso a paso de Kadane"):
-                st.dataframe(pd.DataFrame(kadane_trace(arr)), hide_index=True)
+            if answers:
+                persist_analysis(text, selected, answers)
+                result = answers[0][1]
+                st.html("".join(f'<span class="aud-cell {"aud-opt" if result.start <= i <= result.end else ""}">{v}</span>' for i, v in enumerate(arr[:100])))
+                if len(arr) > 100:
+                    st.caption("Vista limitada a los primeros 100 elementos; el resultado utiliza la entrada completa.")
+                st.caption("Una observación individual contiene ruido; usa Experimentos para comparar medianas.")
+                st.caption(f"Entrada utilizada en este resultado: {text}")
+                with st.expander("Ejecución paso a paso de Kadane"):
+                    st.dataframe(pd.DataFrame(kadane_trace(arr)), hide_index=True)
         except (ValueError, TypeError) as exc:
             st.error(str(exc))
     show_theory()

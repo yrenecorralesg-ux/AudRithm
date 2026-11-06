@@ -32,7 +32,9 @@ No hace falta activar el entorno ni cambiar la política de ejecución de PowerS
 
 requirements-lock.txt registra el entorno Windows/Python 3.13 observado, incluidas herramientas de inspección. Para despliegue o Python 3.11 usar requirements.txt: el resolvedor elegirá dependencias transitivas compatibles (por ejemplo, una versión de NumPy compatible con Python 3.11).
 
-La comprobación funcional adicional se ejecuta con `python scripts/check_app.py` (seis vistas y ejemplo real). En entornos de desarrollo empaquetados que activen `global.developmentMode`, añadir `--global.developmentMode false` al comando de Streamlit si se configura un puerto explícito.
+La comprobación funcional adicional se ejecuta con `python scripts/check_app.py` (seis vistas, ejemplo real, persistencia del último análisis, advertencia al modificar la entrada, limpieza del análisis y navegación). La verificación local actual se realizó en 2026-11-06 con `python scripts/check_app.py` y `python -m pytest tests -q`; ambos comandos devolvieron éxito y se conservan en la evidencia del repositorio. En entornos de desarrollo empaquetados que activen `global.developmentMode`, añadir `--global.developmentMode false` al comando de Streamlit si se configura un puerto explícito.
+
+Verificación local real, no publicación: el proyecto ha sido validado en el entorno local del repositorio, pero la publicación pública en Streamlit Community Cloud o cualquier despliegue real sigue sin verificarse y no se declara como completada. El estado de publicación real debe confirmarse con una URL operativa, acceso a la web y comprobación de las seis vistas en el entorno público.
 
 ## Arquitectura y estructura
 
