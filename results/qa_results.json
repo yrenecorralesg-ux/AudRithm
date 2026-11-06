@@ -1,13 +1,13 @@
 {
-  "tests": 44,
+  "tests": 46,
   "failures": 0,
   "errors": 0,
   "skipped": 0,
-  "passed": 44,
+  "passed": 46,
   "exit_code": 0,
-  "output": "............................................                             [100%]\n44 passed in 1.94s\n",
-  "duration_s": 3.109696100000292,
-  "date": "2026-11-05T22:06:28.211094+00:00",
-  "commit": "29af59c499dc1a1819f7f24c9fc2b9f9f963bb5f",
-  "source_sha256": "8fdf0f9118ca668b903b7ee19598d25037db93bc832f53c50f81a064c158365e"
+  "output": "..............................................                           [100%]\n46 passed in 3.00s\n",
+  "duration_s": 4.434121900005266,
+  "date": "2026-11-06T22:07:45.712260+00:00",
+  "commit": "ac656a85b36bee69c9a277972cdf22e734eecc5c",
+  "source_sha256": "90855944ab63a626d85217554ae6d3ce725b24649d190c1370534fe2e9e2dbc9"
 }
